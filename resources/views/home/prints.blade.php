@@ -3,6 +3,6 @@
 
 @section("main")
     @foreach($list as $name => $item)
-        <x-FileGroupComponent :list="$item" :desc="$name" />
+        <x-PrintsGroupComponent :list="$item" :desc="$name" />
     @endforeach
 @endsection

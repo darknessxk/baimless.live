@@ -8,23 +8,58 @@ use Illuminate\Support\Facades\Storage;
 class MainController extends Controller
 {
     public function index() {
-        return view("welcome");
+        return view("home/welcome");
     }
 
-    public function content($id) {
-        return view("content");
-    }
-
-    public function contentList() {
+    private function fetchList(): string
+    {
         $contentList = "{}";
         if (Storage::exists('list.json')) {
             $contentList = Storage::get("list.json");
         }
 
-        $contentList = str_replace("\n", "", $contentList);
+        return $contentList;
+    }
 
-        return view('list', [
-            'list' => json_decode($contentList, true)
+    public function contentList() {
+        $contentList = json_decode($this->fetchList(), true)['list'];
+
+        return view("home/list", [
+            'list' => $contentList
+        ]);
+    }
+
+    public function injMethods() {
+        $contentList = json_decode($this->fetchList(), true);
+
+        return view("home/list", [
+            'list' => $contentList
+        ]);
+    }
+
+    public function prints() {
+        $printList = json_decode($this->fetchList(), true)['prints'];
+        $contentList = [];
+        $disk = Storage::disk("publicImages");
+
+        foreach ($printList as $key => $value) {
+            $contentList[$key] = [];
+
+            foreach($value as $print) {
+                $hashedName = hash("sha256", $print) . "." . substr($print, strrpos($print, '.') + 1);
+                $path       = sprintf("%s__%s", $key, $hashedName);
+
+                if (!$disk->exists($path)) {
+                    $content = file_get_contents($print);
+                    $disk->put($path, $content);
+                }
+
+                $contentList[$key][] = $disk->url($path);
+            }
+        }
+
+        return view("home/prints", [
+            'list' => $contentList
         ]);
     }
 }

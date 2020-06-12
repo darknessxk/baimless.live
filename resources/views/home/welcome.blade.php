@@ -1,4 +1,5 @@
-@extends("dashboard.layout")
+@extends("home.layout")
+@section('title', 'Baimless.live')
 
 @section("main")
 

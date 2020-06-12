@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/", "MainController@index")->name('Index');
+Route::get("/", "MainController@index")->name('Home');
 Route::get("/content/{id}/", "MainController@content")->name('Content');
 Route::get("/list/", "MainController@contentList")->name('List');
+Route::get("/injection-methods/", "MainController@injMethods")->name("InjMethods");
+Route::get("/prints/", "MainController@prints")->name("Prints");
+
+
+Route::get("/images/{filename}", "StorageController@images")->name("Images");

@@ -16,7 +16,8 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
-        "shahonseven/php-color-hash": "dev-master"
+        "shahonseven/php-color-hash": "dev-master",
+        "ext-fileinfo": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
