@@ -37,7 +37,7 @@ task('build', static function () {
     run('cd {{release_path}} && build');
 });
 
-task('migrate', static function () {
+task('artisan:migrate', static function () {
     print("Disabled");
 });
 
