@@ -1,2 +1,4 @@
 *
 !.gitignore
+!list.json
+!quotes.json
