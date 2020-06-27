@@ -23,8 +23,12 @@ set('allow_anonymous_stats', false);
 // Hosts
 
 host('ec2-18-224-45-183.us-east-2.compute.amazonaws.com')
-	->identityFile('/home/darknessxk/Scripts/vps-exp-01.pem')
-	->set('deploy_path', '/var/www/html/');
+	->user('ubuntu')
+	->stage('production')
+	->identityFile('/home/darknessxk/Scripts/baimless_memed.pem')
+	->addSshOption('UserKnownHostsFile', '/dev/null')
+	->addSshOption('StrictHostKeyChecking', 'no')
+	->set('deploy_path', '/var/www/html');
     
 // Tasks
 
