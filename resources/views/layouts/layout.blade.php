@@ -21,11 +21,11 @@
 <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white">
         <div class="logo">
-            <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+            <a href="{{ URL::to("/") }}" class="simple-text logo-mini">
                 BL
             </a>
 
-            <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+            <a href="{{ URL::to("/") }}" class="simple-text logo-normal">
                 Baimless.live
             </a>
         </div>
@@ -72,21 +72,17 @@
         </div>
         <footer class="footer">
             <div class="container-fluid">
-{{--                <div class="copyright float-right">--}}
-{{--                    &copy;--}}
-{{--                    <script>--}}
-{{--                        document.write(new Date().getFullYear())--}}
-{{--                    </script>, made with <i class="tim-icons icon-heart-2"></i> by--}}
-{{--                    <a href="https://darknessxk.dev" target="_blank">darknessxk</a>.--}}
-{{--                </div>--}}
-
-                <!-- your footer here -->
+                <div class="copyright float-right">
+                    &copy;
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script>, made with <i class="tim-icons icon-heart-2"></i>
+                </div>
             </div>
         </footer>
     </div>
 </div>
 
-<!--   Core JS Files   -->
 <script src="{{ asset("js/dashboard.js") }}"></script>
 
 </body>

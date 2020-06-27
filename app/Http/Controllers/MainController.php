@@ -7,10 +7,6 @@ use Illuminate\Support\Facades\Storage;
 
 class MainController extends Controller
 {
-    public function index() {
-        return view("home/welcome");
-    }
-
     private function fetchList(): string
     {
         $contentList = "{}";
@@ -19,6 +15,19 @@ class MainController extends Controller
         }
 
         return $contentList;
+    }
+
+    public function index() {
+        $contentList = json_decode($this->fetchList(), true);
+
+        $quotes = "{}";
+        if (Storage::exists('quotes.json')) {
+            $quotes = Storage::get("quotes.json");
+        }
+
+        $quotes = json_decode($quotes, true);
+
+        return view("home/welcome", compact('contentList', 'quotes'));
     }
 
     public function contentList() {
@@ -30,7 +39,7 @@ class MainController extends Controller
     }
 
     public function injMethods() {
-        $contentList = json_decode($this->fetchList(), true);
+        $contentList = json_decode($this->fetchList(), true)['injection'];
 
         return view("home/list", [
             'list' => $contentList
