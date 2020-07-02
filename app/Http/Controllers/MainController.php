@@ -49,21 +49,12 @@ class MainController extends Controller
     public function prints() {
         $printList = json_decode($this->fetchList(), true)['prints'];
         $contentList = [];
-        $disk = Storage::disk("publicImages");
 
         foreach ($printList as $key => $value) {
             $contentList[$key] = [];
 
             foreach($value as $print) {
-                $hashedName = hash("sha256", $print) . "." . substr($print, strrpos($print, '.') + 1);
-                $path       = sprintf("%s__%s", $key, $hashedName);
-
-                if (!$disk->exists($path)) {
-                    $content = file_get_contents($print);
-                    $disk->put($path, $content);
-                }
-
-                $contentList[$key][] = $disk->url($path);
+                $contentList[$key][] = $print;
             }
         }
 
